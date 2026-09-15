@@ -1,0 +1,65 @@
+<bh-section
+  title="Dashboard "
+  description="Espace dédié à la gestion du site Book-Hub."
+>
+
+  <bh-section
+    [columns]="2"
+  >
+    <bh-card
+      title="Total des livres"
+      [description]="(countOfAllBooks | async) ?? undefined"
+    >
+    </bh-card>
+    <bh-card
+    title="Emprunts Actifs"
+    [description]="(countOfAllPendingLoans | async) ?? undefined"
+    >
+    </bh-card>
+    <bh-card
+      title="Retard"
+      [description]="(countOverdueLoans | async) ?? undefined"
+    >
+    </bh-card>
+  </bh-section>
+
+
+  <bh-section
+    [columns]="5"
+  >
+    <bh-card
+      title="Gestion des utilisateurs"
+      description="Gérer les utilisateurs et leur rôle."
+      [route]="'/admin/dashboard/users'"
+    >
+    </bh-card>
+    <bh-card
+      title="Gestion des auteurs"
+      description="Gérer les auteurs."
+      [route]="'/admin/dashboard/author'"
+    >
+    </bh-card>
+    <bh-card
+      title="Gestion des éditeurs"
+      description="Gérer les éditeurs."
+      [route]="'/admin/dashboard/publisher'"
+    >
+    </bh-card>
+    <bh-card
+      title="Gestion des catégorie"
+      description="Gérer les catégories."
+      [route]="'/admin/dashboard/categories'"
+    >
+    </bh-card>
+    <bh-card
+      title="Gestion des Livres"
+      description="Gérer les Livres."
+      [route]="'/admin/dashboard/books'"
+    >
+    </bh-card>
+  </bh-section>
+</bh-section>
+
+
+
+

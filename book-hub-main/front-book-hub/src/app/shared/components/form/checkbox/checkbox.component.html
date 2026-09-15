@@ -1,0 +1,24 @@
+<div class="checkbox-wrapper">
+  <label [for]="id" class="checkbox-label">
+    <input
+      type="checkbox"
+      [id]="id"
+      [checked]="checked()"
+      [disabled]="disabled()"
+      (change)="changed.emit($any($event.target).checked)"
+      class="checkbox-input" />
+    <span [class]="classes()">
+      @if (checked()) {
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      }
+    </span>
+    @if (label()) {
+      <legend>{{ label() }}</legend>
+    }
+  </label>
+  @if (error()) {
+    <span class="field-error">{{ error() }}</span>
+  }
+</div>

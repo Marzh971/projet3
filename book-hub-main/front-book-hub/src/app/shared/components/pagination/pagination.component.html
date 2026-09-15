@@ -1,0 +1,30 @@
+<div class="pagination">
+  <div class="pagination-info">
+    @if (total() === 0) {
+      0 résultat
+    } @else {
+      {{ (page() - 1) * pageSize() + 1 }}–{{ page() * pageSize() > total() ? total() : page() * pageSize() }}
+      sur {{ total() }}
+    }
+  </div>
+
+  @if (total() > pageSize()) {
+    <div class="pagination-controls">
+      <button class="page-btn" [disabled]="page() === 1" (click)="pageChanged.emit(page() - 1)">‹</button>
+      @for (p of pages(); track p) {
+        <button [class]="cn('page-btn', p === page() && 'page-btn-active')" (click)="pageChanged.emit(p)">{{ p }}
+        </button>
+      }
+      <button class="page-btn" [disabled]="page() === totalPages()" (click)="pageChanged.emit(page() + 1)">›</button>
+    </div>
+  }
+
+  <div class="pagination-size">
+    <span>Lignes</span>
+    <select (change)="pageSizeChanged.emit(+$any($event.target).value)">
+      @for (s of pageSizes; track s) {
+        <option [value]="s" [selected]="s === pageSize()">{{ s }}</option>
+      }
+    </select>
+  </div>
+</div>

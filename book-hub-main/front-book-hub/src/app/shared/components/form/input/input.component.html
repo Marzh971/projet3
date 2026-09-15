@@ -1,0 +1,21 @@
+<div>
+  @if (label()) {
+    <label class="text-sec" style="font-size: var(--text-sm); font-weight: var(--font-medium)">
+      {{ label() }}
+    </label>
+  }
+  <input
+    [type]="type()"
+    [class]="classes()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [value]="value"
+    (input)="onChange($any($event.target).value)"
+    (blur)="onTouched()"
+  />
+  @if (error()) {
+    <span style="font-size: var(--text-xs); color: var(--danger-default);">
+      {{ error() }}
+    </span>
+  }
+</div>

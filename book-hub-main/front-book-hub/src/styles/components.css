@@ -1,0 +1,16 @@
+@layer components {
+  .input-field {
+    @apply w-full;
+    background: var(--surface-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    padding: .5rem .75rem;
+    font-size: var(--text-sm);
+    transition: border-color .15s;
+    outline: none;
+  }
+
+  .input-field:focus { border-color: var(--brand-default); }
+  .input-error       { border-color: var(--danger-default); }
+}

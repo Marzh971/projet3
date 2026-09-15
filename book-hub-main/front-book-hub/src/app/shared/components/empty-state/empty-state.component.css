@@ -1,0 +1,31 @@
+@reference "../../../../styles.css";
+
+.empty-state {
+  @apply flex flex-col items-center justify-center w-full;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  gap: .75rem;
+}
+
+.empty-state-icon {
+  @apply flex items-center justify-center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--surface-raised);
+  color: var(--text-muted);
+}
+
+.empty-state-title {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.empty-state-message {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 320px;
+}

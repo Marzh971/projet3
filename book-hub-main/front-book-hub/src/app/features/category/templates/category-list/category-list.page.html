@@ -1,0 +1,123 @@
+<bh-section
+  title="Catégories"
+  description="Catégories disponibles"
+>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (paginated().length === 0) {
+          <tr>
+            <td [colSpan]="2">
+              <bh-empty-state
+                title="Aucune catégorie"
+                message="Aucune catégorie ne correspond à cette page."
+                icon="heroInbox">
+              </bh-empty-state>
+            </td>
+          </tr>
+        }
+        @else {
+          @for (
+            category of paginated();
+            track category.id
+            ) {
+            <tr>
+              <td>
+                {{ category.nameCategory }}
+              </td>
+              <td>
+                <bh-dropdown
+                  [items]="actionsFor(category)"
+                />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</bh-section>
+
+<div class="list-footer">
+  <bh-button
+    label="Ajouter une catégorie"
+    variant="primary"
+    [routerLink]="[
+      '/category/create'
+    ]"
+  />
+</div>
+<ng-template
+  #deleteModalTplt
+>
+  <form
+    [formGroup]="deleteForm"
+    (ngSubmit)="confirmDelete()"
+  >
+    <p>
+      Cette action est irréversible.
+      Pour confirmer, tapez
+      <strong>
+        {{
+          categoryToDelete
+            ?.nameCategory
+        }}
+      </strong>
+      ci-dessous.
+    </p>
+    <bh-input
+      label="Confirmation"
+      formControlName="confirmation"
+    />
+    <br>
+    <bh-button
+      label="Supprimer définitivement"
+      variant="danger"
+      type="submit"
+      [disabled]="
+        !isConfirmationValid() ||
+        deleting()
+      "
+    />
+  </form>
+</ng-template>
+<ng-template
+  #updateModalTplt
+>
+  <form
+    [formGroup]="updateForm"
+    (ngSubmit)="update()"
+  >
+    <bh-input
+      label="Nom"
+      formControlName="nameCategory"
+    />
+    <br>
+    <bh-button
+      label="Enregistrer"
+      variant="primary"
+      type="submit"
+      [disabled]="
+        updateForm.invalid ||
+        updating()
+      "
+    />
+  </form>
+</ng-template>
+
+@if (totalElements() > 0) {
+  <bh-pagination
+    [total]="totalElements()"
+    [page]="page()"
+    [pageSize]="pageSize()"
+    (pageChanged)="onPageChange($event)"
+    (pageSizeChanged)="onPageSizeChange($event)">
+  </bh-pagination>
+
+}

@@ -1,0 +1,409 @@
+<bh-section
+  title="Détail"
+  class="book-detail-section"
+>
+  @if (book(); as book) {
+
+
+    @if (hasRoleLibrarian) {
+      <div class="flex items-center gap-1.5 pb-2">
+
+        <bh-button
+          label="Déclarer un emprunt"
+          variant="primary"
+          (click)="openLoanModal()"
+        >
+        </bh-button>
+
+        <bh-button
+          label="Modifier"
+          variant="ghost"
+          (click)="openBookUpdateModal()">
+        </bh-button>
+
+        <bh-button
+          label="Rendre inactif"
+          variant="danger"
+          (click)="setInactive()"
+        >
+        </bh-button>
+      </div>
+    }
+
+    <div class="book-detail">
+
+      <div class="book-detail__cover">
+        <img
+          [src]="'assets/covers/' + (book.cover ?? 'default.jpg')"
+          [alt]="book.title">
+      </div>
+
+      <div class="book-detail__content">
+
+        <h1>{{ book.title }}</h1>
+
+        <div class="book-rating">
+          @if (hasRatings(book.reviews)) {
+
+            <p>
+              ⭐ {{ getAverageRate(book.reviews) }}/5
+              ({{ countRatings(book.reviews) }} notes)
+            </p>
+
+          } @else {
+
+            <p>
+              Aucune note disponible.
+            </p>
+
+          }
+        </div>
+
+        <bh-button
+          label="Réserver"
+          variant= "primary"
+          (click)="reserverLivre()"
+        />
+
+        <bh-details [details]="details()" />
+
+
+        <div class="categories">
+
+          @for (
+            category of book.categories;
+            track category.id
+            ) {
+
+            <bh-badge variant="primary">
+              {{ category.nameCategory }}
+            </bh-badge>
+          }
+        </div>
+      </div>
+
+      <div class="book-detail__authors">
+
+        <h2>Auteur(s) :</h2>
+
+        <p>
+
+          @for (
+            author of book.authors;
+            track author.id;
+            let last = $last
+            ) {
+
+            {{ author.firstName }} {{ author.lastName }}
+
+            @if (!last) {
+              ,
+            }
+
+          }
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="book-detail__description">
+
+      <h2>Description</h2>
+
+      <p>
+        {{ book.description || 'Aucune description.' }}
+      </p>
+
+    </div>
+
+    <div class="book-detail__reviews">
+
+      <div
+        class="flex items-center"
+        style="
+          justify-content: space-between;
+          margin-bottom: 1.5rem;
+        "
+      >
+
+        <h2 style="margin: 0;">
+          Avis
+        </h2>
+
+        <bh-button
+          label="Laisser un avis"
+          variant="primary"
+          (click)="openReviewModal()"
+        />
+
+      </div>
+
+      @if (book.reviews.length) {
+
+        @for (
+          review of book.reviews;
+          track review.id
+          ) {
+
+          <div class="review-card">
+
+            <!-- Note à gauche / menu à droite -->
+            <div
+              class="review-card__header"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+              "
+            >
+
+              <div>
+
+                <div class="review-card__rate">
+                  ⭐ {{ review.rate }}/5
+                </div>
+
+                <div
+                  class="review-card__user"
+                  style="
+                    margin-top: 0.35rem;
+                    font-weight: 600;
+                  "
+                >
+                  {{ review.username }}
+                </div>
+
+              </div>
+
+              <div
+                style="
+                  margin-left: auto;
+                  flex-shrink: 0;
+                "
+              >
+
+                <bh-dropdown
+                  [items]="actionsFor(review)"
+                />
+
+              </div>
+
+            </div>
+
+            <p
+              style="
+                margin-top: 0.75rem;
+                margin-bottom: 0;
+              "
+            >
+              {{ review.comment }}
+            </p>
+
+          </div>
+
+        }
+
+      } @else {
+
+        <p>
+          Aucun avis pour ce livre.
+        </p>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <p>
+      Aucun livre trouvé.
+    </p>
+
+  }
+</bh-section>
+
+
+<!-- MODAL : AJOUT D'UN AVIS -->
+<ng-template #reviewModalTplt>
+
+  <form
+    [formGroup]="reviewForm"
+    (ngSubmit)="submitReview()"
+  >
+
+    <bh-input
+      label="Note (1 à 5)"
+      type="number"
+      formControlName="rate"
+    />
+
+    <bh-input
+      label="Commentaire"
+      placeholder="Votre avis sur ce livre"
+      type="text"
+      formControlName="comment"
+    />
+
+    <br>
+
+    <div class="flex items-center gap-1.5">
+
+      <bh-button
+        label="Envoyer"
+        type="submit"
+        [disabled]="submitting()"
+      />
+
+      <bh-button
+        label="Annuler"
+        variant="ghost"
+        type="button"
+        (click)="closeReviewModal()"
+      />
+
+    </div>
+
+  </form>
+
+</ng-template>
+
+
+<ng-template #updateModalTplt>
+
+  <form
+    [formGroup]="updateForm"
+    (ngSubmit)="submitUpdate()"
+  >
+
+    <bh-input
+      label="Note (1 à 5)"
+      type="number"
+      formControlName="rate"
+    />
+
+    <bh-input
+      label="Commentaire"
+      type="text"
+      formControlName="comment"
+    />
+
+    <br>
+
+    <bh-button
+      label="Enregistrer"
+      variant="primary"
+      type="submit"
+      [disabled]="updateForm.invalid || updating()"
+    />
+
+  </form>
+
+</ng-template>
+
+
+<ng-template #deleteModalTplt>
+
+  <p>
+    Voulez-vous vraiment supprimer cet avis ?
+    Cette action est irréversible.
+  </p>
+
+  <div class="flex items-center gap-1.5 mt-4">
+
+    <bh-button
+      label="Oui, supprimer"
+      variant="danger"
+      [disabled]="deleting()"
+      (click)="confirmDelete()"
+    />
+
+    <bh-button
+      label="Non, annuler"
+      variant="ghost"
+      (click)="cancelDelete()"
+    />
+
+  </div>
+
+</ng-template>
+
+
+<!-- MODAL : BOOK -->
+<ng-template #bookUpdateModalTplt>
+  <form [formGroup]="bookUpdateForm" (ngSubmit)="submitBookUpdate()">
+    <bh-input label="Titre" type="text" formControlName="title" />
+    <bh-input label="Description" type="text" formControlName="description" />
+    <bh-input label="Date de publication" type="date" formControlName="publicationDate" />
+    <bh-input label="Nombre de pages" type="number" formControlName="pageNumber" />
+
+    <bh-select
+      label="Éditeur"
+      [options]="publisher()"
+      formControlName="publisher"
+      placeholder="Sélectionner un éditeur">
+    </bh-select>
+
+    <bh-multi-select
+      label="Catégories"
+      [options]="categories()"
+      formControlName="categories"
+      placeholder="Rechercher une catégorie">
+    </bh-multi-select>
+
+    <bh-multi-select
+      label="Auteurs"
+      [options]="authors()"
+      formControlName="authors"
+      placeholder="Rechercher un auteur">
+    </bh-multi-select>
+
+    <br>
+
+    <div class="flex items-center gap-1.5">
+      <bh-button label="Enregistrer" type="submit" [disabled]="bookUpdating()" />
+      <bh-button label="Annuler" variant="ghost" type="button" (click)="closeBookUpdateModal()" />
+    </div>
+  </form>
+</ng-template>
+
+
+<!-- MODAL : LOAN -->
+<ng-template #loanModalTplt>
+
+  <form
+    [formGroup]="loanForm"
+    (ngSubmit)="submitLoan()"
+  >
+
+    <bh-select
+      label="Utilisateur"
+      [options]="users()"
+      formControlName="userId"
+      placeholder="Sélectionner un utilisateur">
+    </bh-select>
+
+    <br>
+
+    <div class="flex items-center gap-1.5">
+
+      <bh-button
+        label="Confirmer"
+        type="submit"
+        [disabled]="loanForm.invalid || loaning()"
+      />
+
+      <bh-button
+        label="Annuler"
+        variant="ghost"
+        type="button"
+        (click)="closeLoanModal()"
+      />
+
+    </div>
+
+  </form>
+
+</ng-template>

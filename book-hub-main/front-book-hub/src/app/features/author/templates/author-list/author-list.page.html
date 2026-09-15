@@ -1,0 +1,115 @@
+<bh-section
+  title="Auteurs"
+  description="Liste des auteurs"
+>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        @if (paginated().length === 0) {
+          <tr>
+            <td [colSpan]="3">
+              <bh-empty-state
+                title="Aucun auteur"
+                message="Aucun auteur ne correspond à cette page."
+                icon="heroInbox">
+              </bh-empty-state>
+            </td>
+          </tr>
+        } @else {
+          @for (author of paginated(); track author.id) {
+            <tr>
+              <td>{{ author.firstName }}</td>
+              <td>{{ author.lastName }}</td>
+              <td>
+                <bh-dropdown
+                  [items]="actionsFor(author)">
+                </bh-dropdown>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</bh-section>
+
+<div class="list-footer">
+
+  <bh-button
+    label="Ajouter un auteur"
+    variant="primary"
+    [routerLink]="['/author/create']">
+  </bh-button>
+
+</div>
+
+<ng-template #deleteModalTplt>
+  <form [formGroup]="deleteForm" (ngSubmit)="confirmDelete()">
+    <p>
+      Cette action est irréversible.
+      Pour confirmer, tapez
+      <strong>
+        {{ authorToDelete?.firstName }} {{ authorToDelete?.lastName }}
+      </strong>
+      ci-dessous.
+    </p>
+
+    <bh-input
+      label="Confirmation"
+      formControlName="confirmation"
+    />
+    <br>
+    <bh-button
+      label="Supprimer définitivement"
+      variant="danger"
+      type="submit"
+      [disabled]="!isConfirmationValid() || deleting()"
+    />
+  </form>
+</ng-template>
+
+<ng-template #updateModalTplt>
+  <form [formGroup]="updateForm" (ngSubmit)="update()">
+
+    <bh-input
+      label="Prénom"
+      formControlName="firstName"
+    />
+
+    <br>
+
+    <bh-input
+      label="Nom"
+      formControlName="lastName"
+    />
+
+    <br>
+
+    <bh-button
+      label="Enregistrer"
+      variant="primary"
+      type="submit"
+      [disabled]="updateForm.invalid || updating()"
+    />
+
+  </form>
+
+</ng-template>
+
+@if (totalElements() > 0) {
+  <bh-pagination
+    [total]="totalElements()"
+    [page]="page()"
+    [pageSize]="pageSize()"
+    (pageChanged)="onPageChange($event)"
+    (pageSizeChanged)="onPageSizeChange($event)">
+  </bh-pagination>
+}

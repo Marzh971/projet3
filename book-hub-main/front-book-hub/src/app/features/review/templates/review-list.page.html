@@ -1,0 +1,110 @@
+<bh-section
+  title="Avis"
+  description="Liste des avis"
+>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Note</th>
+        <th>Commentaire</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (paginated().length === 0) {
+          <tr>
+            <td [colSpan]="4">
+              <bh-empty-state
+                title="Aucun avis"
+                message="Aucun avis ne correspond à cette page."
+                icon="heroInbox">
+              </bh-empty-state>
+            </td>
+          </tr>
+        } @else {
+          @for (review of paginated(); track review.id) {
+            <tr>
+              <td>{{ review.rate }}/5</td>
+              <td>{{ review.comment }}</td>
+              <td>{{ review.dateReview }}</td>
+              <td>
+                <bh-dropdown [items]="actionsFor(review)" />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</bh-section>
+
+<div class="list-footer">
+
+  @if (totalElements() > 0) {
+    <bh-pagination
+      [total]="totalElements()"
+      [page]="page()"
+      [pageSize]="pageSize()"
+      (pageChanged)="onPageChange($event)"
+      (pageSizeChanged)="onPageSizeChange($event)">
+    </bh-pagination>
+  }
+
+</div>
+
+<ng-template #deleteModalTplt>
+
+  <p>
+    Voulez-vous vraiment supprimer cet avis ? Cette action est irréversible.
+  </p>
+
+  <div class="flex items-center gap-1.5 mt-4">
+
+    <bh-button
+      label="Oui, supprimer"
+      variant="danger"
+      [disabled]="deleting()"
+      (click)="confirmDelete()"
+    />
+
+    <bh-button
+      label="Non, annuler"
+      variant="ghost"
+      (click)="cancelDelete()"
+    />
+
+  </div>
+
+</ng-template>
+
+<ng-template #updateModalTplt>
+
+  <form [formGroup]="updateForm" (ngSubmit)="update()">
+
+    <bh-input
+      label="Note (1 à 5)"
+      type="number"
+      formControlName="rate"
+    />
+
+    <br>
+
+    <bh-input
+      label="Commentaire"
+      formControlName="comment"
+    />
+
+    <br>
+
+    <bh-button
+      label="Enregistrer"
+      variant="primary"
+      type="submit"
+      [disabled]="updateForm.invalid || updating()"
+    />
+
+  </form>
+
+</ng-template>

@@ -1,0 +1,62 @@
+<div class="relative flex flex-col gap-1 mb-2">
+  @if (label()) {
+    <label class="select-label">{{ label() }}</label>
+  }
+
+  @if (isOpen()) {
+    <div
+      class="fixed inset-0 z-40 bg-transparent"
+      (click)="closeDropdown(); $event.stopPropagation()">
+    </div>
+  }
+
+  <div
+    [class]="containerClasses()"
+    (click)="openDropdown()">
+
+    @for (opt of selectedOptions(); track opt.value) {
+      <span class="tag-chip">
+        {{ opt.label }}
+        <button
+          type="button"
+          class="tag-chip-remove"
+          (click)="removeOption(opt.value); $event.stopPropagation()">
+          ×
+        </button>
+      </span>
+    }
+
+    <input
+      type="text"
+      class="tag-input"
+      [placeholder]="selectedOptions().length === 0 ? placeholder() : ''"
+      [value]="searchTerm()"
+      [disabled]="disabled()"
+      (input)="onSearchChange($any($event.target).value)"
+      (focus)="openDropdown()"
+      (keydown.backspace)="onBackspace()"
+      (keydown.escape)="closeDropdown()"
+    />
+  </div>
+
+  @if (isOpen()) {
+    <ul class="select-dropdown z-50" (click)="$event.stopPropagation()">
+      @if (filteredOptions().length > 0) {
+        @for (opt of filteredOptions(); track opt.value) {
+          <li
+            class="select-dropdown-item"
+            [class.opacity-50]="opt.disabled"
+            (click)="!opt.disabled && addOption(opt.value)">
+            {{ opt.label }}
+          </li>
+        }
+      } @else {
+        <li class="select-dropdown-empty">Aucun résultat</li>
+      }
+    </ul>
+  }
+
+  @if (error()) {
+    <span class="field-error">{{ error() }}</span>
+  }
+</div>

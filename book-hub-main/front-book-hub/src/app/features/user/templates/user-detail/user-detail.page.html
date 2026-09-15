@@ -1,0 +1,18 @@
+@if (loaded()) {
+  <bh-section
+    [title]="'Profil de : ' + user()?.username"
+  >
+    <bh-details
+      [details]="details()"
+    />
+  </bh-section>
+} @else {
+  <bh-section
+    [title]="'Aucun utilisateur trouvé'"
+  >
+    <bh-empty-state
+      [title]="'Ce profil n\'a pas pu être chargé.'"
+    >
+    </bh-empty-state>
+  </bh-section>
+}

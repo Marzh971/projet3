@@ -1,0 +1,45 @@
+@reference "../../../../styles.css";
+
+.section {
+  @apply flex flex-col;
+}
+
+.section-header {
+  @apply flex items-start justify-between gap-4;
+}
+
+.ui-section__header {
+  @apply flex flex-row items-center gap-2;
+}
+
+.section-meta {
+  @apply flex flex-col gap-1 m-0;
+}
+
+.section-action {
+  flex-shrink: 0;
+}
+
+.section-body {
+  @apply grid gap-2;
+}
+
+.section-footer {
+  @apply flex justify-center gap-2 mt-4 pt-4;
+  border-top: 1px solid var(--border-default);
+}
+
+.section-filters {
+  @apply flex flex-col lg:flex-row gap-4 items-end py-4;
+}
+
+.section-filters ::ng-deep .input-field {
+  height: 40px;
+}
+
+.section-filters ::ng-deep .btn {
+  height: 40px;
+}
+.section-filters ::ng-deep bh-select > div {
+  margin-bottom: 0 !important;
+}

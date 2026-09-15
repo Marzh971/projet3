@@ -1,0 +1,33 @@
+<form [formGroup]="copyForm" (ngSubmit)="submit()">
+  <bh-section
+    title="Ajouter un exemplaire"
+    description="Créer un nouvel exemplaire pour un livre existant."
+    [columns]="2"
+  >
+
+    <bh-input
+      label="Code-barre"
+      type="text"
+      formControlName="barcode"
+    />
+
+    <bh-input
+      label="ISBN du livre"
+      type="text"
+      formControlName="bookIsbn"
+    />
+
+  </bh-section>
+
+  <div class="flex items-center gap-1.5">
+    <bh-button
+      label="Créer"
+      type="submit"
+    />
+    <bh-button
+      label="Annuler"
+      variant="ghost"
+      routerLink="/copies"
+    />
+  </div>
+</form>

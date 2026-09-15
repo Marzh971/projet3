@@ -1,0 +1,23 @@
+@reference "../../../../styles.css";
+
+.badge {
+  @apply inline-flex items-center font-medium;
+  font-size: var(--text-xs);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+}
+
+.badge-primary {
+  background: var(--brand-subtle);
+  color: var(--brand-text);
+}
+
+.badge-danger {
+  background: var(--danger-subtle);
+  color: var(--danger-text);
+}
+
+.badge-neutral {
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-700);
+}

@@ -1,0 +1,36 @@
+<header class="app-header">
+  <div class="header-inner">
+    <a routerLink="/" class="header-logo">
+      <img ngSrc="/assets/livre-ouvert.png" alt="Logo" height="30" width="30">
+      Book-Hub</a>
+
+    @if (isAuthenticated()) {
+      <nav class="header-nav">
+        @for (item of navAuth; track item.route) {
+          <a [routerLink]="item.route"
+             routerLinkActive="nav-active"
+             [routerLinkActiveOptions]="{ exact: false }">
+            {{ item.label }}
+          </a>
+        }
+      </nav>
+    }
+
+    <div class="header-actions">
+      @if (isAuthenticated()) {
+        <span class="header-pseudo">{{ currentUser()?.username }}</span>
+
+        <bh-dropdown [items]="actionsFor(currentUser())" />
+        <span (click)="onLogout()">
+          <bh-button label="Déconnexion"></bh-button>
+        </span>
+      } @else {
+        @for (item of navVisi; track item.route) {
+          <a [routerLink]="item.route" class="header-btn">
+            {{ item.label }}
+          </a>
+        }
+      }
+    </div>
+  </div>
+</header>

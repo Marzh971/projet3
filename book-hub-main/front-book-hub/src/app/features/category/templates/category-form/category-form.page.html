@@ -1,0 +1,56 @@
+<form
+  [formGroup]="CategoryCreateForm"
+  (ngSubmit)="submit()"
+>
+
+  <bh-section
+
+    title="Créer une catégorie"
+
+    description="Formulaire de création d'une catégorie"
+
+    [columns]="2"
+
+  >
+
+    <bh-input
+
+      label="Nom"
+
+      placeholder="Veuillez choisir un nom de catégorie"
+
+      type="text"
+
+      formControlName="nameCategory"
+
+    />
+
+  </bh-section>
+
+
+  <div
+    class="flex items-center gap-1.5"
+  >
+
+    <bh-button
+
+      label="Créer"
+
+      type="submit"
+
+    />
+
+
+    <bh-button
+
+      label="Annuler"
+
+      variant="ghost"
+
+      routerLink="/category"
+
+    />
+
+  </div>
+
+</form>

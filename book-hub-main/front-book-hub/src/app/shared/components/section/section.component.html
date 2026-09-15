@@ -1,0 +1,39 @@
+<section class="section" [id]="sectionId()">
+  @if (title() || description()) {
+    <div class="section-header">
+      <div class="section-meta">
+        <div class="ui-section__header">
+          @if (title()) {
+            @if (titleSize() == 'level-3'){
+              <h3>{{ title() }}</h3>
+            } @else if (titleSize() == 'level-2'){
+            <h2>{{ title() }}</h2>
+            } @else {
+            <h1>{{ title() }}</h1>
+            }
+          }
+          @if (label()) {
+            <bh-badge [variant]="labelColor()">{{ label() }}</bh-badge>
+          }
+        </div>
+        @if (description()) {
+          <p class="section-desc">{{ description() }}</p>
+        }
+      </div>
+      <div class="section-action">
+        <ng-content select="[sectionAction]" />
+      </div>
+    </div>
+    <bh-divider />
+  }
+
+  <div class="section-filters">
+    <ng-content select="[sectionFilters]" />
+  </div>
+  <div class="section-body" [style.grid-template-columns]="gridColumns()">
+    <ng-content />
+  </div>
+  <div class="section-footer">
+    <ng-content select="[sectionFooter]" />
+  </div>
+</section>

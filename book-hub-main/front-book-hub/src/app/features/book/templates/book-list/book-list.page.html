@@ -1,0 +1,78 @@
+<bh-section
+  title="Liste des livres"
+  description="Voici la liste de tout nos livres disponibles."
+  [columns]="columns()">
+
+
+
+  <form
+    sectionFilters
+    class="flex flex-col lg:flex-row gap-4 items-end"
+    (ngSubmit)="onFilter()">
+
+    <bh-input
+      class="flex-1"
+      name="text"
+      placeholder="Rechercher par titre, auteur ou ISBN..."
+      type="text"
+      [(ngModel)]="text">
+    </bh-input>
+
+    <bh-select
+      class="w-full lg:w-64"
+      [options]="categories()"
+      placeholder=""
+      (changed)="categoryId = $event === '' ? undefined : +$event">
+    </bh-select>
+
+    <bh-select
+      class="w-full lg:w-64"
+      [options]="disponibilities()"
+      placeholder="">
+    </bh-select>
+
+    <bh-button
+      type="submit"
+      label="Filtrer">
+    </bh-button>
+
+    @if (hasRoleLibrarian) {
+    <bh-button
+      label="Ajouter un livre"
+      routerLink="/book/create">
+    </bh-button>
+    }
+
+  </form>
+
+
+  @if (books().length === 0) {
+    <bh-empty-state
+      title="Aucun Livre"
+      message="Aucun Livre ne correspond à cette page."
+      icon="heroInbox">
+    </bh-empty-state>
+
+  } @else {
+
+    @for (book of books(); track book.isbn) {
+      <bh-card
+        [title]="book.title"
+        [image]="'assets/covers/' + (book.cover ?? 'default.jpg')"
+        [description]="getAuthors(book)"
+        [badge]="getCategories(book)"
+        [route]="'/book/' + book.isbn">
+      </bh-card>
+    }
+  }
+</bh-section>
+
+@if (totalElements() > 0) {
+  <bh-pagination
+    [total]="totalElements()"
+    [page]="page() + 1"
+    [pageSize]="pageSize()"
+    (pageChanged)="onPageChange($event)"
+    (pageSizeChanged)="onPageSizeChange($event)">
+  </bh-pagination>
+}

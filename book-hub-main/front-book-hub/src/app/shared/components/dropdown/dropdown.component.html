@@ -1,0 +1,23 @@
+<div class="dropdown">
+  <button class="dropdown-trigger" (click)="toggle($event)">
+    <ng-icon [name]="trigger()" size="18" />
+  </button>
+  @if (open()) {
+    <div class="dropdown-menu" [style.top.px]="menuTop()" [style.left.px]="menuLeft()">
+      <div class="dropdown-menu-inner">
+        @for (item of items(); track item.label) {
+          <button
+            [class]="'dropdown-item' + (item.danger ? ' dropdown-item-danger' : '') + (item.disabled ? ' dropdown-item-disabled' : '')"
+            [disabled]="item.disabled"
+            (click)="select(item)">
+            <ng-icon [name]="item.icon" size="16" />
+            <span>{{ item.label }}</span>
+            @if (item.badge) {
+              <bh-badge [variant]="item.badge.variant">{{ item.badge.text }}</bh-badge>
+            }
+          </button>
+        }
+      </div>
+    </div>
+  }
+</div>

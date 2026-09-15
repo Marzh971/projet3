@@ -1,0 +1,19 @@
+<div
+  class="app-shell"
+  [class.home-page]="isHomePage"
+>
+  <bh-header />
+  <main class="app-main">
+    <div class="page-content">
+
+      @if (!isHomePage) {
+        <bh-breadcrumb />
+      }
+      <router-outlet />
+    </div>
+  </main>
+  <bh-footer />
+  <bh-toast />
+  <bh-modal />
+
+</div>

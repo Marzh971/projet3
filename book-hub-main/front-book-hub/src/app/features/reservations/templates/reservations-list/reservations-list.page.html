@@ -1,0 +1,81 @@
+<bh-section
+  title="Réservations"
+  description="Réservations disponibles"
+>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Titre du Livre</th>
+        <th>Nom Utilisateur</th>
+        <th>Date Réservation</th>
+        <th>Etat</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (paginated().length === 0) {
+          <tr>
+            <td [colSpan]="6">
+              <bh-empty-state
+                title="Aucunes reservations"
+                message="Aucune reservation ne correspond à cette page."
+                icon="heroInbox">
+              </bh-empty-state>
+            </td>
+          </tr>
+        } @else {
+          @for (reservation of paginated(); track reservation.id) {
+            <tr>
+              <td>{{ reservation.id }}</td>
+              <td>{{ reservation.bookTitle }}</td>
+              <td>{{ reservation.username }}</td>
+              <td>{{ reservation.dateReservation | date : "dd/MM/yyyy"}}</td>
+              <td>{{ reservation.stateReservation }}</td>
+              <td>
+                <bh-dropdown [items]="actionsFor(reservation)" />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</bh-section>
+
+<ng-template #deleteModalTplt>
+  <form [formGroup]="deleteForm" (ngSubmit)="confirmDelete()">
+    <p>
+      Cette action est irréversible. Pour confirmer, tapez
+      <strong>{{ reservationToDelete?.id }}</strong> ci-dessous.
+    </p>
+
+    <bh-input label="Confirmation" formControlName="confirmation" />
+
+    <br>
+
+    <bh-button
+      label="Supprimer définitivement"
+      variant="danger"
+      [disabled]="!isConfirmationValid() || deleting()"
+    />
+  </form>
+</ng-template>
+
+<!--<ng-template #updateModalTplt>-->
+<!--  <form [formGroup]="updateForm" (ngSubmit)="update()">-->
+
+<!--    <bh-input label="Id" formControlName="id"/>-->
+
+<!--    <bh-input label="Nom" formControlName="nameCategory" />-->
+
+<!--    <br>-->
+
+<!--    <bh-button-->
+<!--      label="Enregistrer"-->
+<!--      variant="primary"-->
+<!--      [disabled]="updateForm.invalid || updating()"-->
+<!--    />-->
+<!--  </form>-->
+<!--</ng-template>-->

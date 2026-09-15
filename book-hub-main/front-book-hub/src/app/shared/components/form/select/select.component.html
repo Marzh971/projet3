@@ -1,0 +1,22 @@
+<div class="flex flex-col gap-1 mb-2">
+  @if (label()) {
+    <label class="select-label">{{ label() }}</label>
+  }
+  <select
+    [class]="classes()"
+    [disabled]="disabled()"
+    [value]="value()"
+    (change)="onSelectionChange($event)">
+    @if (placeholder()) {
+      <option value="" disabled [selected]="!value()">{{ placeholder() }}</option>
+    }
+    @for (opt of options(); track opt.value) {
+      <option [value]="opt.value" [disabled]="opt.disabled ?? false" [selected]="opt.value === value()">
+        {{ opt.label }}
+      </option>
+    }
+  </select>
+  @if (error()) {
+    <span class="field-error">{{ error() }}</span>
+  }
+</div>

@@ -1,0 +1,77 @@
+<form [formGroup]="bookCreateForm" (ngSubmit)="submit()">
+  <bh-section
+    title="Ajouter un livre"
+    description="Formulaire de création de livre"
+    [columns]="3"
+  >
+
+    <bh-input
+      label="ISBN"
+      type="text"
+      formControlName="isbn"
+    />
+    <bh-input
+      label="Titre"
+      type="text"
+      formControlName="title"
+    />
+
+    <bh-input
+      label="Description"
+      type="text"
+      formControlName="description"
+    />
+
+    <bh-input
+      label="Date de publication"
+      type="date"
+      formControlName="publicationDate"
+    >
+    </bh-input>
+
+    <bh-input
+      label="Nombre de pages"
+      type="number"
+      formControlName="pageNumber"
+    />
+
+    <bh-select
+      label="Éditeur"
+      [options]="publisher()"
+      formControlName="publisher"
+      placeholder="">
+    </bh-select>
+
+    <bh-multi-select
+    label="Catégories"
+    [options]="categories()"
+    formControlName="categories"
+    placeholder="Sélectionner catégorie(s)">
+    </bh-multi-select>
+
+    <bh-multi-select
+      label="Auteurs"
+      [options]="authors()"
+      formControlName="authors"
+      placeholder="Sélectionner auteur(s)">
+    </bh-multi-select>
+
+    <bh-input
+      label="Nombre d'exemplaires"
+      type="number"
+      formControlName="copyNumber"
+    />
+
+  </bh-section>
+  <div class="flex items-center gap-1.5">
+    <bh-button
+      label="Créer"
+      type="submit"
+    />
+    <bh-button
+      label="Annuler"
+      variant="ghost"
+      routerLink="/book"
+    />
+  </div>
+</form>

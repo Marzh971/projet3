@@ -1,0 +1,28 @@
+@reference "../../../../styles.css";
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 font-medium cursor-pointer border-none;
+  border-radius: var(--radius-md);
+  padding: .5rem 1rem;
+  font-size: var(--text-sm);
+  transition: background .15s, color .15s;
+}
+
+.btn-primary {
+  background: var(--brand-default);
+  color: var(--text-inverse);
+}
+.btn-primary:hover { background: var(--brand-hover); }
+
+.btn-ghost {
+  background: var(--brand-subtle);
+  color: var(--brand-text);
+  border: 1px solid var(--border-default);
+}
+.btn-ghost:hover { background: var(--surface-raised); }
+
+.btn-danger {
+  background: var(--danger-default);
+  color: var(--text-inverse);
+}
+.btn-danger:hover { background: var(--danger-hover); }

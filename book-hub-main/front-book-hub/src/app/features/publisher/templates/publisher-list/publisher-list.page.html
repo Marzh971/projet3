@@ -1,0 +1,108 @@
+<bh-section
+  title="Éditeurs"
+  description="Liste des éditeurs"
+>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (paginated().length === 0) {
+          <tr>
+            <td [colSpan]="2">
+              <bh-empty-state
+                title="Aucun éditeur"
+                message="Aucun éditeur ne correspond à cette page."
+                icon="heroInbox">
+              </bh-empty-state>
+            </td>
+          </tr>
+        } @else {
+          @for (publisher of paginated(); track publisher.id) {
+            <tr>
+              <td>{{ publisher.name }}</td>
+              <td>
+                <bh-dropdown [items]="actionsFor(publisher)" />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</bh-section>
+
+<div class="list-footer">
+
+  <bh-button
+    label="Ajouter un éditeur"
+    variant="primary"
+    [routerLink]="['/publisher/create']">
+  </bh-button>
+
+</div>
+
+<ng-template #deleteModalTplt>
+
+  <form [formGroup]="deleteForm" (ngSubmit)="confirmDelete()">
+
+    <p>
+      Cette action est irréversible.
+      Pour confirmer, tapez
+      <strong>{{ publisherToDelete?.name }}</strong>
+      ci-dessous.
+    </p>
+
+    <bh-input
+      label="Confirmation"
+      formControlName="confirmation"
+    />
+
+    <br>
+
+    <bh-button
+      label="Supprimer définitivement"
+      variant="danger"
+      type="submit"
+      [disabled]="!isConfirmationValid() || deleting()"
+    />
+
+  </form>
+
+</ng-template>
+
+<ng-template #updateModalTplt>
+
+  <form [formGroup]="updateForm" (ngSubmit)="update()">
+
+    <bh-input
+      label="Nom"
+      formControlName="name"
+    />
+
+    <br>
+
+    <bh-button
+      label="Enregistrer"
+      variant="primary"
+      type="submit"
+      [disabled]="updateForm.invalid || updating()"
+    />
+
+  </form>
+
+</ng-template>
+
+@if (totalElements() > 0) {
+  <bh-pagination
+    [total]="totalElements()"
+    [page]="page()"
+    [pageSize]="pageSize()"
+    (pageChanged)="onPageChange($event)"
+    (pageSizeChanged)="onPageSizeChange($event)">
+  </bh-pagination>
+}

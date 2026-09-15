@@ -1,0 +1,65 @@
+<bh-section
+  title="Utilisateurs"
+  description="Liste des utilisateurs"
+>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Pseudo</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (paginated().length === 0) {
+          <tr>
+            <td [colSpan]="3">
+              <bh-empty-state
+                title="Aucun utilisateur"
+                message="Aucun utilisateur ne correspond à cette page."
+                icon="heroInbox">
+              </bh-empty-state>
+            </td>
+          </tr>
+        } @else {
+          @for (user of paginated(); track user.id) {
+            <tr>
+              <td>
+                <a href="/users/{{ user.id }}">{{ user.username }}</a>
+              </td>
+              <td>{{ user.email }}</td>
+              <td>
+                <bh-dropdown [items]="actionsFor(user)" />
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</bh-section>
+<bh-button
+  label="Ajouter un utilisateur"
+  variant="primary"
+  [routerLink]="['/users/create']"
+></bh-button>
+
+<ng-template #deleteModalTplt>
+  <form [formGroup]="deleteForm" (ngSubmit)="confirmDelete()">
+    <p>
+      Cette action est irréversible. Pour confirmer, tapez
+      <strong>{{ userToDelete?.username }}</strong> ci-dessous.
+    </p>
+
+    <bh-input label="Confirmation" formControlName="confirmation" />
+
+    <br>
+
+    <bh-button
+      label="Supprimer définitivement"
+      variant="danger"
+      [disabled]="!isConfirmationValid() || deleting()"
+    />
+  </form>
+</ng-template>

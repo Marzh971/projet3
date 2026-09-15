@@ -1,0 +1,25 @@
+<form [formGroup]="publisherCreateForm" (ngSubmit)="submit()">
+  <bh-section
+    [title]="isEditMode ? 'Modifier un éditeur' : 'Créer un éditeur'"
+    [description]="isEditMode ? 'Formulaire de modification d\'un éditeur' : 'Formulaire de création d\'un éditeur'"
+    [columns]="1"
+  >
+    <bh-input
+      label="Nom"
+      placeholder="Veuillez choisir un nom entre 2 et 50 caractères"
+      type="text"
+      formControlName="name"
+    />
+  </bh-section>
+  <div class="flex items-center gap-1.5">
+    <bh-button
+      [label]="isEditMode ? 'Modifier' : 'Créer'"
+      type="submit"
+    />
+    <bh-button
+      label="Annuler"
+      variant="ghost"
+      routerLink="/publisher"
+    />
+  </div>
+</form>

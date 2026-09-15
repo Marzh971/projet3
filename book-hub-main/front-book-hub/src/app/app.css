@@ -1,0 +1,27 @@
+@reference "../styles.css";
+
+.app-shell {
+  @apply
+  flex flex-col
+  min-h-screen
+  bg-cover bg-center bg-fixed bg-primary-50
+}
+
+.app-main {
+  @apply
+  flex flex-1 items-center
+  mt-[calc(var(--header-height)+3vh)]
+  mb-[3vh]
+  mx-[15vw];
+}
+
+.page-content {
+  @apply
+  mx-auto px-6 py-6 rounded-lg overflow-y-auto
+  w-full;
+  max-height: calc(100vh - var(--header-height) - var(--footer-height) - 7vh);
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  opacity: 0.95;
+  scrollbar-gutter: stable;
+}

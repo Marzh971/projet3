@@ -1,0 +1,35 @@
+<div class="radio-wrapper">
+  @if (label()) {
+    <span class="radio-group-label">{{ label() }}</span>
+  }
+  <div [class]="containerClasses()">
+    @for (opt of options(); track opt.value) {
+      <span class="radio-divider">
+        <label [class]="'radio-item' + (opt.disabled || disabled() ? ' radio-item-disabled' : '')">
+          <input
+            type="radio"
+            class="radio-input"
+            [name]="groupId"
+            [value]="opt.value"
+            [checked]="opt.value === value()"
+            [disabled]="opt.disabled || disabled()"
+            (change)="changed.emit(opt.value)"/>
+          <span [class]="'radio' + (opt.value === value() ? ' radio-checked' : '')">
+          @if (opt.value === value()) {
+            <span class="radio-dot"></span>
+          }
+        </span>
+          <span class="radio-content">
+          <label>{{ opt.label }}</label>
+            @if (opt.description) {
+              <legend>{{ opt.description }}</legend>
+            }
+        </span>
+        </label>
+      </span>
+    }
+  </div>
+  @if (error()) {
+    <span class="field-error">{{ error() }}</span>
+  }
+</div>

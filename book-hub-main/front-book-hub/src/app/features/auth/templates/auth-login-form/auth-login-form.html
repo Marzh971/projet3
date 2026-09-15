@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" (ngSubmit)="submit()">
+  <bh-section
+    title="Connexion"
+    description="Formulaire de connexion"
+    [columns]="3"
+  >
+    <bh-input
+    label="Email"
+    placeholder="Veuillez renseigner un email valide"
+    type="text"
+    formControlName="email"
+    />
+
+    <bh-input
+      label="Mot de passe"
+      placeholder="Veuillez choisir un mot de passe entre 12 et 30 caractères"
+      type="password"
+      formControlName="password"
+    />
+  </bh-section>
+
+  <div class="flex items-center gap-1.5">
+    <bh-button label="Se connecter"type="submit"></bh-button>
+  </div>
+
+</form>

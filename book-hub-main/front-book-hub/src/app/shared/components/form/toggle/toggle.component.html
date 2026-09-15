@@ -1,0 +1,14 @@
+<label class="toggle-wrapper">
+  <input
+    type="checkbox"
+    class="toggle-input"
+    [checked]="checked()"
+    [disabled]="disabled()"
+    (change)="changed.emit($any($event.target).checked)" />
+  <span [class]="trackClasses()">
+    <span [class]="thumbClasses()"></span>
+  </span>
+  @if (label()) {
+    <span class="toggle-label">{{ label() }}</span>
+  }
+</label>

@@ -1,0 +1,9 @@
+@if (orientation() === 'horizontal') {
+  <div class="divider-h">
+    @if (label()) {
+      <span class="divider-label">{{ label() }}</span>
+    }
+  </div>
+} @else {
+  <div class="divider-v"></div>
+}

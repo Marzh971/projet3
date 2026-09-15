@@ -1,0 +1,106 @@
+@reference "../../../../styles.css";
+
+.app-header {
+  background: var(--surface-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+}
+
+.header-inner {
+  @apply
+  flex
+  max-w-[980px] w-full
+  items-center justify-between gap-8 px-6
+  mx-auto;
+  height: var(--header-height);
+}
+@media (max-width: 950px) {
+  .header-inner {
+    @apply
+    mx-[2vw] ;
+  }
+}
+
+.header-logo {
+  @apply flex flex-row items-center gap-2;
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--brand-default);
+  font-family: var(--font-serif), serif;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.header-nav {
+  @apply flex gap-0 flex-1 items-center justify-center
+}
+
+.header-nav a {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0 .75rem;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color .15s;
+}
+
+.header-nav a:hover { color: var(--text-primary); }
+
+.header-nav a.nav-active {
+  color: var(--brand-default);
+  font-weight: var(--font-medium);
+  border-bottom-color: var(--brand-default);
+}
+
+.header-toggle {
+  background: none;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: .25rem .75rem;
+  font-size: var(--text-base);
+  transition: background .15s;
+}
+
+.header-toggle:hover {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.header-pseudo {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-primary);
+}
+
+.header-btn {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: none;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: .35rem .85rem;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.header-btn:hover {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+}

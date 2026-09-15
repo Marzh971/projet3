@@ -1,0 +1,8 @@
+<div class="detail-zone">
+  @for (item of details(); track item.label) {
+    <div class="detail-slot">
+      <label for="{{item.label}}">{{ item.label }} : </label>
+      <span id="{{item.label}}">{{ item.value }}</span>
+    </div>
+  }
+</div>

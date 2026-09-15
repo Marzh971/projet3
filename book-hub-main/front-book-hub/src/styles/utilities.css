@@ -1,0 +1,7 @@
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  .surface-page   { background: var(--surface-page); }
+  .surface-card   { background: var(--surface-card); }
+  .surface-raised { background: var(--surface-raised); }
+}

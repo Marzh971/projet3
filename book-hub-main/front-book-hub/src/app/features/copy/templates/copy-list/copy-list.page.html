@@ -1,0 +1,36 @@
+<bh-section
+  title="Exemplaires"
+  description="La liste entière des exemplaires en notre possession."
+  [columns]="columns()">
+
+  @if (copies().length === 0) {
+    <bh-empty-state
+      title="Aucun exemplaire"
+      message="Nous n'avons encore aucun exemplaire disponible."
+      icon="heroInbox">
+    </bh-empty-state>
+
+  } @else {
+
+    @for (copy of copies(); track copy.id) {
+      <bh-card
+        [title]="copy.bookTitle"
+        [description]="'Code-barre : ' + copy.barcode"
+        [badge]="formatDate(copy.purchaseDate)"
+        [route]="'/copies/' + copy.id">
+      </bh-card>
+    }
+
+  }
+
+</bh-section>
+
+@if (totalElements() > 0) {
+  <bh-pagination
+    [total]="totalElements()"
+    [page]="page() + 1"
+    [pageSize]="pageSize()"
+    (pageChanged)="onPageChange($event)"
+    (pageSizeChanged)="onPageSizeChange($event)">
+  </bh-pagination>
+}

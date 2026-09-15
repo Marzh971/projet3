@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-1">
+  @if (label()) {
+    <label class="textarea-label">{{ label() }}</label>
+  }
+  <textarea
+    [class]="classes()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [rows]="rows()"
+    (input)="changed.emit($any($event.target).value)">{{ value() }}</textarea>
+  @if (error()) {
+    <span class="field-error">{{ error() }}</span>
+  }
+</div>

@@ -1,0 +1,40 @@
+@reference "../../../../styles.css";
+
+.divider-h {
+  @apply flex items-center gap-3 w-full my-2;
+}
+
+.divider-h::before,
+.divider-h::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--border-default);
+}
+
+.divider-h:not(:has(.divider-label))::after {
+  display: none;
+}
+
+.divider-label {
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  color: var(--text-muted);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divider-v {
+  width: 1px;
+  height: 100%;
+  background: var(--border-default);
+}
+
+:host {
+  display: contents;
+}
+
+:host([orientation="vertical"]) {
+  display: flex;
+  align-self: stretch;
+}

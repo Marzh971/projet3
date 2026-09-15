@@ -1,0 +1,46 @@
+@reference "../../../../../styles.css";
+
+.toggle-wrapper {
+  @apply inline-flex items-center gap-2;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-track {
+  position: relative;
+  border-radius: var(--radius-full);
+  background: var(--color-neutral-300);
+  transition: background .2s;
+  flex-shrink: 0;
+}
+
+.toggle-track-md { width: 40px; height: 22px; }
+.toggle-track-sm { width: 30px; height: 16px; }
+
+.toggle-track-checked  { background: var(--brand-default); }
+.toggle-track-disabled { opacity: .5; cursor: not-allowed; }
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: var(--radius-full);
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  transition: transform .2s;
+}
+
+.toggle-thumb-md { width: 18px; height: 18px; }
+.toggle-thumb-sm { width: 12px; height: 12px; }
+
+.toggle-thumb-checked-md { transform: translateX(18px); }
+.toggle-thumb-checked-sm { transform: translateX(14px); }
+
+.toggle-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}

@@ -1,0 +1,57 @@
+@reference "../../../../styles.css";
+
+.pagination {
+  @apply flex items-center justify-between mt-4;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.pagination-controls {
+  @apply flex items-center gap-1;
+}
+
+.pagination-info {
+  color: var(--text-muted);
+}
+
+.page-btn {
+  @apply flex items-center justify-center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-btn-active {
+  background: var(--brand-default);
+  color: var(--text-inverse);
+  border-color: var(--brand-default);
+}
+
+.pagination-size {
+  @apply flex items-center gap-2;
+}
+
+.pagination-size select {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  padding: 2px 6px;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}

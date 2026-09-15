@@ -1,0 +1,67 @@
+@reference "../../../../styles.css";
+
+.dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.dropdown-trigger {
+  @apply flex items-center justify-center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.dropdown-trigger:hover {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+}
+
+.dropdown-menu {
+  position: fixed;
+  min-width: 180px;
+  z-index: 20;
+}
+
+.dropdown-menu-inner {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item {
+  @apply flex items-center gap-2 w-full text-left;
+  padding: .5rem .75rem;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background .1s;
+}
+
+.dropdown-item:hover {
+  background: var(--surface-raised);
+  color: var(--text-primary);
+}
+
+.dropdown-item-danger { color: var(--danger-default); }
+.dropdown-item-danger:hover {
+  background: var(--danger-subtle);
+  color: var(--danger-default);
+}
+
+.dropdown-item-disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}

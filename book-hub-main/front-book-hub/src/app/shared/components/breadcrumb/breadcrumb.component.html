@@ -1,0 +1,68 @@
+<nav
+  class="breadcrumb"
+  aria-label="Fil d'Ariane"
+>
+  <ol class="breadcrumb-list">
+
+    <li class="breadcrumb-item">
+
+      <a
+        routerLink="/"
+        class="breadcrumb-link breadcrumb-home"
+      >
+        <ng-icon
+          name="heroHome"
+          size="14"
+        />
+      </a>
+
+      <ng-icon
+        name="heroChevronRight"
+        size="12"
+        class="breadcrumb-sep"
+      />
+
+    </li>
+
+    @for (
+      item of breadcrumb.items();
+      track item.label;
+      let last = $last
+      ) {
+
+      <li class="breadcrumb-item">
+
+        @if (item.route && !last) {
+
+          <a
+            [routerLink]="item.route"
+            [fragment]="item.fragment"
+            class="breadcrumb-link"
+          >
+            {{ item.label }}
+          </a>
+
+        } @else {
+
+          <span class="breadcrumb-current">
+            {{ item.label }}
+          </span>
+
+        }
+
+        @if (!last) {
+
+          <ng-icon
+            name="heroChevronRight"
+            size="12"
+            class="breadcrumb-sep"
+          />
+
+        }
+
+      </li>
+
+    }
+
+  </ol>
+</nav>

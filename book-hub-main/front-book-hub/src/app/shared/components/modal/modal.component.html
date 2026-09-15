@@ -1,0 +1,29 @@
+@if (modal.visible() && modal.config()) {
+  <div class="modal-backdrop" (click)="modal.cancel()">
+    <div
+      [class]="'modal-box modal-' + (modal.config()!.size ?? 'md')"
+      (click)="$event.stopPropagation()">
+
+      <div class="modal-header">
+        <h2>{{ modal.config()!.title }}</h2>
+        <button class="modal-close" (click)="modal.cancel()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        @if (modal.config()!.template) {
+          <ng-container *ngTemplateOutlet="modal.config()!.template!" />
+        } @else if (modal.config()!.content) {
+          <p>{{ modal.config()!.content }}</p>
+        }
+      </div>
+
+      @if (modal.config()!.onConfirm) {
+        <div class="modal-footer">
+          <bh-button variant="ghost"   (click)="modal.cancel()">Annuler</bh-button>
+          <bh-button variant="primary" (click)="modal.confirm()">Confirmer</bh-button>
+        </div>
+      }
+
+    </div>
+  </div>
+}

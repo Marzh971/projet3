@@ -1,0 +1,65 @@
+@reference "../../../../styles.css";
+
+:host {
+  min-width: 0;
+}
+
+.card,
+.card-raised {
+  @apply flex flex-col overflow-hidden h-full no-underline rounded-lg w-full relative;
+}
+
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+}
+
+.card-raised {
+  background: var(--surface-raised);
+}
+
+.card-constrained {
+  max-width: 20rem;
+}
+
+.card-interactive {
+  @apply cursor-pointer transition-all duration-200;
+}
+
+.card-interactive:hover {
+  @apply -translate-y-0.5;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--brand-default);
+}
+
+.card-interactive:hover .card-image img {
+  @apply scale-105;
+}
+
+.card-image {
+  @apply relative overflow-hidden aspect-video;
+}
+
+.card-image img {
+  @apply block w-full h-full object-cover transition-transform duration-300;
+}
+
+.card-body {
+  @apply flex flex-col gap-2 pt-4 pr-4 pl-4 mb-4 flex-1;
+}
+
+.card-body > * {
+  @apply self-start;
+}
+
+.card-badge {
+  @apply absolute top-3 right-3 z-20;
+}
+
+.zone-footer {
+  @apply pt-3 pr-4 pl-4 pb-3;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--brand-default);
+  border-top: 1px solid var(--border-default);
+}

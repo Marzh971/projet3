@@ -1,0 +1,42 @@
+<bh-section
+  title="Emprunts"
+  description="Liste des emprunts"
+>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+      <tr>
+        <th>Date de retrait</th>
+        <th>Date de retour</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        @if (paginated().length === 0) {
+          <tr>
+            <td [colSpan]="3">
+              <bh-empty-state
+                title="Aucun emprunt"
+                message="Aucun emprunt ne correspond à cette page."
+                icon="heroInbox">
+              </bh-empty-state>
+            </td>
+          </tr>
+        } @else {
+          @for (loan of paginated(); track loan.id) {
+            <tr>
+              <td>{{ loan.dateRetrieved | date:'dd/MM/yyyy' }}</td>
+              <td>{{ loan.dateReturned | date:'dd/MM/yyyy' }}</td>
+              <td>
+                <bh-dropdown
+                  [items]="actionsFor(loan)">
+                </bh-dropdown>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</bh-section>

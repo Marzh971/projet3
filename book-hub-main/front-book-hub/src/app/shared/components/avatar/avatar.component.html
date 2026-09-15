@@ -1,0 +1,10 @@
+<div [class]="classes()">
+  @if (src() && !hasError) {
+    <img [src]="src()" [alt]="name()" (error)="onImgError()" />
+  } @else {
+    <span class="avatar-initials">{{ initials() }}</span>
+  }
+  @if (status()) {
+    <span [class]="'avatar-status avatar-status-' + status()"></span>
+  }
+</div>

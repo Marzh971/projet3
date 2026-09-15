@@ -1,0 +1,21 @@
+<bh-section
+  title="Détail de l'exemplaire"
+>
+
+  @if (copy(); as copy) {
+
+    <bh-card
+      [title]="copy.bookTitle"
+      [description]="'Auteur : ' + copy.bookAuthor"
+      [route]="'/book/' + copy.bookIsbn">
+    </bh-card>
+
+
+
+  } @else {
+
+    <p>Aucun exemplaire trouvé.</p>
+
+  }
+
+</bh-section>

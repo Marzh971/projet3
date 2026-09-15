@@ -1,0 +1,46 @@
+@if (route()) {
+  <a [class]="classes()" [routerLink]="route()" [fragment]="fragment()">
+    <ng-container *ngTemplateOutlet="cardContent"/>
+  </a>
+} @else {
+  <div [class]="classes()">
+    <ng-container *ngTemplateOutlet="cardContent"/>
+  </div>
+}
+
+<ng-template #cardContent>
+  @if (badge()) {
+    <div class="card-badge">
+      <bh-badge>{{ badge() }}</bh-badge>
+    </div>
+  }
+  @if (image()) {
+    <div class="card-image">
+      <img [src]="image()" [alt]="title()"/>
+    </div>
+  }
+  @if (title() || description()) {
+    <div class="card-body">
+      @if (title()) {
+        <h3>
+          {{ title() }}
+        </h3>
+      }
+      @if (description()) {
+        <legend>
+          {{ description() }}
+        </legend>
+      }
+    </div>
+  }
+  @if (footer() || route()) {
+    <div class="zone-footer">
+      @if (footer()) {
+        <legend>{{ footer() }}</legend>
+      }
+      @if (route()) {
+        <span>Accéder →</span>
+      }
+    </div>
+  }
+</ng-template>

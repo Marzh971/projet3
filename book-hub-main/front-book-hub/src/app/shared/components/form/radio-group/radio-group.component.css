@@ -1,0 +1,80 @@
+@reference "../../../../../styles.css";
+
+.radio-wrapper {
+  @apply flex flex-col gap-2;
+}
+
+.radio-divider {
+  @apply flex items-center gap-2;
+}
+
+.radio-group-label {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-secondary);
+}
+
+.radio-group {
+  @apply flex flex-row gap-2  ;
+}
+
+.radio-group-horizontal {
+  @apply flex-row gap-4;
+}
+
+.radio-item {
+  @apply flex items-center gap-2;
+  cursor: pointer;
+  user-select: none;
+}
+
+.radio-item-disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.radio-input {
+  display: none;
+}
+
+.radio {
+  @apply flex items-center justify-center flex-shrink-0;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--border-strong);
+  background: var(--surface-card);
+  transition: border-color .15s;
+}
+
+.radio-checked {
+  border-color: var(--brand-default);
+}
+
+.radio-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--brand-default);
+}
+
+.radio-content {
+  @apply flex flex-col gap-0;
+}
+
+.radio-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.radio-description {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.field-error {
+  font-size: var(--text-xs);
+  color: var(--danger-default);
+}

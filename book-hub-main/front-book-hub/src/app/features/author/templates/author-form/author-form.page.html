@@ -1,0 +1,31 @@
+<form [formGroup]="authorCreateForm" (ngSubmit)="submit()">
+  <bh-section
+    [title]="isEditMode ? 'Modifier un auteur' : 'Créer un auteur'"
+    [description]="isEditMode ? 'Formulaire de modification d\'un auteur' : 'Formulaire de création d\'un auteur'"
+    [columns]="2"
+  >
+    <bh-input
+      label="Prénom"
+      placeholder="Veuillez choisir un prénom entre 2 et 30 caractères"
+      type="text"
+      formControlName="firstName"
+    />
+    <bh-input
+      label="Nom"
+      placeholder="Veuillez choisir un nom entre 2 et 30 caractères"
+      type="text"
+      formControlName="lastName"
+    />
+  </bh-section>
+  <div class="flex items-center gap-1.5">
+    <bh-button
+      [label]="isEditMode ? 'Modifier' : 'Créer'"
+      type="submit"
+    />
+    <bh-button
+      label="Annuler"
+      variant="ghost"
+      routerLink="/author"
+    />
+  </div>
+</form>

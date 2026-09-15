@@ -1,0 +1,53 @@
+@reference "../../../../styles.css";
+
+.breadcrumb {
+  @apply w-full;
+}
+
+.breadcrumb-list {
+  @apply flex items-center flex-wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 4px;
+}
+
+.breadcrumb-item {
+  @apply flex items-center gap-1;
+}
+
+.breadcrumb-link {
+  @apply flex items-center;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color .15s;
+}
+
+.breadcrumb-link:hover {
+  color: var(--brand-default);
+}
+
+.breadcrumb-home {
+  color: var(--text-muted);
+}
+
+.breadcrumb-current {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: var(--font-medium);
+}
+
+.breadcrumb-sep {
+  color: var(--text-muted);
+}
+
+:host {
+  display: block;
+}
+
+/* Masque uniquement le breadcrumb lorsque
+   le composant reçoit la classe correspondante */
+:host-context(.home-page) {
+  display: none;
+}

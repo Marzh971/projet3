@@ -1,0 +1,65 @@
+<form [formGroup]="userCreateForm" (ngSubmit)="submit()">
+  <bh-section
+    title="Créer un utilisateur"
+    description="Formulaire de création d'un utilisateur"
+    [columns]="3"
+  >
+    <bh-input
+      label="Pseudo"
+      placeholder="Veuillez choisir un pseudo entre 3 et 20 caractères"
+      type="text"
+      formControlName="username"
+    />
+    <bh-input
+      label="Nom"
+      placeholder="Veuillez choisir un pseudo entre 2 et 30 caractères"
+      type="text"
+      formControlName="lastName"
+    />
+    <bh-input
+      label="Prénom"
+      placeholder="Veuillez choisir un pseudo entre 3 et 30 caractères"
+      type="text"
+      formControlName="firstName"
+    />
+  </bh-section>
+  <bh-section
+    [columns]="2"
+  >
+    <bh-input
+      label="Email"
+      placeholder="Veuillez renseigner un email valide"
+      type="text"
+      formControlName="email"
+    />
+    <bh-input
+      label="N° de téléphone"
+      placeholder="Veuillez renseigner un numéro de téléphone valide"
+      type="text"
+      formControlName="phone"
+    />
+    <bh-input
+      label="Mot de passe"
+      placeholder="Veuillez choisir un mot de passe entre 8 et 20 caractères"
+      type="password"
+      formControlName="password"
+    />
+    <bh-input
+      label="Confirmation du mot de passe"
+      placeholder="Veuillez confirmer votre mot de passe"
+      type="password"
+      formControlName="passwordConfirmation"
+    />
+  </bh-section>
+  <div class="flex items-center gap-1.5">
+  <bh-button
+    label="Créer"
+    type="submit"
+  />
+  <bh-button
+    label="Annuler"
+    variant="ghost"
+    routerLink="/users"
+  />
+  </div>
+</form>

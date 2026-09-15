@@ -1,0 +1,72 @@
+.book-detail {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.book-detail__cover img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+
+.book-detail__content h1 {
+  margin-top: 0;
+}
+
+.book-detail__reviews{
+  margin-top: 2rem;
+}
+
+.review-card {
+  margin-bottom: 1rem;
+  padding: 0.2rem;
+  border-radius: 12px;
+  background: #fafafa;
+  border-left: 5px solid #ffc107;
+}
+
+.review-card__rate {
+  margin-bottom: .2rem;
+  font-weight: 700;
+  color: #ff9800;
+}
+
+@media (max-width: 768px) {
+  .book-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .book-detail__cover {
+    text-align: center;
+  }
+
+  .book-detail__cover img {
+    max-width: 250px;
+  }
+
+  .book-detail__infos p {
+    flex-direction: column;
+    gap: .25rem;
+  }
+
+  ::ng-deep .categories .badge {
+    padding: .7rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: .95rem;
+  }
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  :host ::ng-deep .section-filters {
+    padding-block: 0 !important;
+  }
+
+}
